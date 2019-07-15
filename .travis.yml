@@ -1,0 +1,10 @@
+sudo: required # super user permissions required for any docker tasks
+services:
+  - docker # by mentioning docker as a service, travis will install docker as a service
+
+before_install: # serires of commands that are executed before our tests are run or deployed
+  - docker build -t shawakash54/docker-react -f Dockerfile.dev .
+
+script: # it contains all the commands that are required to execute the test suite. When we run the test suite in travis, it will 
+# consider that the test suite runs and exits automatically
+  - docker run shawakash54/docker-react npm run test -- --coverage
