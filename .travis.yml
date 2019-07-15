@@ -7,4 +7,4 @@ before_install: # serires of commands that are executed before our tests are run
 
 script: # it contains all the commands that are required to execute the test suite. When we run the test suite in travis, it will 
 # consider that the test suite runs and exits automatically
-  - docker run shawakash54/docker-react npm run test -- --coverage
+  - docker run -e CI=true shawakash54/docker-react npm run test -- --coverage
