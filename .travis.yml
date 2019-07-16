@@ -8,3 +8,16 @@ before_install: # serires of commands that are executed before our tests are run
 script: # it contains all the commands that are required to execute the test suite. When we run the test suite in travis, it will 
 # consider that the test suite runs and exits automatically
   - docker run -e CI=true shawakash54/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react-demo"
+  env: "DockerReactDemo-env"
+  bucket_name: "elasticbeanstalk-us-east-2-794721244726" # travis will zip all the files and copy it over to s3 bucket and tell EBS that use the zip file in S3 to redeploy the app
+  bucket_path: "docker-react-demo" # bucket path will be the same as app name
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
