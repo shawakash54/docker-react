@@ -8,6 +8,6 @@ RUN npm run build
 
 # Run Phase
 FROM nginx
-EXPOSE 3000
+EXPOSE 80
 COPY --from=builder /app/build /usr/share/nginx/html
 # default command for NGINX container is to start up NGINX server
